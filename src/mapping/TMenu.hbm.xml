@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-9-19 8:53:44 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.lei.entity.TMenu" table="t_menu" catalog="ssh">
+        <id name="id" type="string">
+            <column name="id" length="40" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="TMenu" class="com.lei.entity.TMenu" fetch="select">
+            <column name="pid" length="40" />
+        </many-to-one>
+        <property name="text" type="string">
+            <column name="text" length="50" />
+        </property>
+        <property name="iconClas" type="string">
+            <column name="iconClas" length="50" />
+        </property>
+        <property name="url" type="string">
+            <column name="url" length="100" />
+        </property>
+        <set name="TMenus" table="t_menu" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pid" length="40" />
+            </key>
+            <one-to-many class="com.lei.entity.TMenu" />
+        </set>
+    </class>
+</hibernate-mapping>

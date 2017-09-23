@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-9-20 20:25:40 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.lei.entity.TFilm" table="t_film" catalog="ssh">
+        <id name="id" type="string">
+            <column name="id" length="40" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="50" />
+        </property>
+        <property name="describe" type="string">
+            <column name="describe" />
+        </property>
+        <property name="classifyId" type="string">
+            <column name="classify_id" length="40" />
+        </property>
+        <property name="classifyText" type="string">
+            <column name="classify_text" length="40" />
+        </property>
+        <property name="img" type="string">
+            <column name="img" length="150" />
+        </property>
+        <property name="url" type="string">
+            <column name="url" length="150" />
+        </property>
+        <property name="startTime" type="timestamp">
+            <column name="start_time" length="19" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="update_time" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

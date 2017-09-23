@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-9-19 9:44:35 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.lei.entity.TUser" table="t_user" catalog="ssh">
+        <id name="id" type="string">
+            <column name="id" length="40" />
+            <generator class="assigned" />
+        </id>
+        <property name="username" type="string">
+            <column name="username" length="50" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="50" not-null="true" />
+        </property>
+        <property name="nick" type="string">
+            <column name="nick" length="50" not-null="true">
+                <comment>
+                &#201;&#190;&#179;&#253;&#177;&#234;&#188;&#199;&#163;&#172;&#206;&#180;&#201;&#190;&#179;&#253;&#206;&#170;0&#163;&#172;&#210;&#209;&#201;&#190;&#179;&#253;&#206;&#170;1</comment>
+            </column>
+        </property>
+        <property name="createTime" type="date">
+            <column name="create_time" length="10" />
+        </property>
+        <property name="updateTime" type="date">
+            <column name="update_time" length="10">
+                <comment>&#215;&#238;&#186;&#243;&#210;&#187;&#180;&#206;&#184;&#252;&#208;&#194;&#202;&#177;&#188;&#228;</comment>
+            </column>
+        </property>
+        <property name="deleteFlag" type="string">
+            <column name="delete_flag" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

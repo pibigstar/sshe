@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+	<!-- 指定Web应用的默认编码集,相当于调用HttpServletRequest的setCharacterEncoding方法 --> 
+	<constant name="struts.i18n.encoding" value="UTF-8" /> 
+ 	<!-- 开发模式下使用,这样可以打印出更详细的错误信息 --> 
+	<constant name="struts.devMode" value="true" /> 
+	<!-- 设置默认的locale和字符编码 --> 
+	<constant name="struts.locale" value="zh_CN" /> 
+	<!-- 设置是否支持动态方法调用(userAction!add)，true为支持，false不支持. --> 
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />   
+    <constant name="struts.devMode" value="true" />  
+	
+    <package name="basePackage" extends="struts-default">
+        <global-allowed-methods>reg,login,repair,getMenu,getList,add,remove,edit</global-allowed-methods>
+    </package>
+    
+</struts>
