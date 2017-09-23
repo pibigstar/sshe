@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -23,6 +25,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Action(value = "userAction")
 public class UserAction extends BaseAction implements ModelDriven<User>,ServletRequestAware{
 	
+	private Logger logger = Logger.getLogger(UserAction.class);
 	private User user = new User();
 	private HttpServletRequest request;
 	@Override
@@ -72,6 +75,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>,ServletR
 			session.setAttribute("sessionInfo", info);
 			j.setSuccess(true);
 			j.setMsg("登录成功！");
+			logger.info(tUser.getNick()+"用户登录成功");
 		}else {
 			j.setMsg("登录失败！用户或密码错误");
 		}
