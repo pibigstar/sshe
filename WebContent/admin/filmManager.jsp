@@ -10,7 +10,7 @@ $('#admin_film_grid').datagrid({
     rownumbers:true,
     checkOnSelect:false,
     selectOnCheck:false,
-    toolbar: '#admin_filmManager_toolbar',
+    toolbar: '#admin_film_toolbar',
     sortName:'name',
     sortOrder:'asc',
     columns:[[    
@@ -27,7 +27,7 @@ $('#admin_film_grid').datagrid({
 });
 
 function searchFilm(){
-	var text = $("#admin_filmManager_searchInput").val();
+	var text = $("#admin_film_searchInput").val();
     if(text != ""){
         $('#admin_film_grid').datagrid('load',{
             name: text
@@ -38,16 +38,16 @@ function searchFilm(){
 }
 
 function showFilmDia(){
-    $('#admin_filmManager_addDialog').dialog('open');
+    $('#admin_film_addDialog').dialog('open');
 }
 function addFilm(){
-    $('#admin_filmManager_regForm').form('submit',{
+    $('#admin_film_regForm').form('submit',{
         
         url:'${pageContext.request.contextPath }/filmAction!add',
         success:function(data){
             var obj = $.parseJSON(data);
             if (obj.success) {
-                $('#admin_filmManager_addDialog').dialog('close');
+                $('#admin_film_addDialog').dialog('close');
                 $.messager.show({
                     title : '提示',
                     msg : obj.msg,
@@ -97,23 +97,23 @@ function removeFilm(){
 
 function clearFilm(){
     $("#admin_film_grid").datagrid('load',{});
-    $("#admin_filmManager_searchInput").val('');
+    $("#admin_film_searchInput").val('');
 }
 </script>
 
 
-<div id="admin_filmManager_toolbar">
+<div id="admin_film_toolbar">
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="showFilmDia()">添加</a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onClick="removeFilm()">删除</a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
-    <input id="admin_filmManager_searchInput" name="name"/>
+    <input id="admin_film_searchInput" name="name"/>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onClick="searchFilm()">查询</a>
-        <a href="#"class="easyui-linkbutton"data-options="iconCls:'icon-undo',plain:true" onClick="clearFilm()">清空</a>
+    <a href="#"class="easyui-linkbutton"data-options="iconCls:'icon-undo',plain:true" onClick="clearFilm()">清空</a>
 </div>
 
 <table id="admin_film_grid"></table>
  
- <div id="admin_filmManager_addDialog" style="width:400px; height:300px;" class="easyui-dialog" data-options="title:'新增影片',modal:true,closed:true,buttons:[{
+ <div id="admin_film_addDialog" style="width:400px; height:300px;" class="easyui-dialog" data-options="title:'新增影片',modal:true,closed:true,buttons:[{
             text:'添加',
             iconCls:'icon-add',
             handler:function(){
@@ -122,24 +122,24 @@ function clearFilm(){
             },{text:'取消',
                 iconCls:'icon-remove',
                 handler:function(){
-                   $('#admin_filmManager_addDialog').dialog('close'); 
+                   $('#admin_film_addDialog').dialog('close'); 
                 }
             }]">
-   <form id="admin_filmManager_regForm" method="post">
+   <form id="admin_film_regForm" method="post" enctype="multipart/form-data">
         <table>
             <tr>
                 <td>影片名称</td>
-                <td><input name="name" style="width:200px"
-                    class="easyui-validatebox"
-                    data-options="required:true,missingMessage:'名称不能为空'"></td>
+                <td>
+                    <input name="name" style="width:200px"class="easyui-validatebox" data-options="required:true,missingMessage:'名称不能为空'">
+                </td>
             </tr>
             <tr>
                 <td>上映时间</td>
-                <td><input name="startTime" id="dd" type="text" class="easyui-datebox" required="required" style="width:200px"/></td>
+                <td><input name="startTime" class="easyui-datebox" required="required" style="width:200px"/></td>
             </tr>
              <tr>
                 <td>片图</td>
-                <td><input name="img" class="easyui-filebox" data-options="accept:'image/*',multiple:true" style="width:300px"></td>
+                <td><input name="file" class="easyui-filebox" data-options="accept:'image/*',multiple:true" style="width:300px"></td>
             </tr>
             <tr>
                 <td>描述</td>

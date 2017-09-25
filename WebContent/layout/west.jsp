@@ -45,7 +45,7 @@
                         <li><a onclick="changeThemeFun('gray');">gray</a></li>
                         <li><a onclick="changeThemeFun('metro');">metro</a></li>
                         <li><a onclick="changeThemeFun('bootstrap');">bootstrap</a></li>
-                        <li><a onclick="changeThemeFun('black');" >black</a></li>
+                        <li><a onclick="changeThemeFun('black');">black</a></li>
                         <li><a onclick="changeThemeFun('cupertino');">cupertino</a></li>
                         <li><a onclick="changeThemeFun('dark-hive');">dark-hive</a></li>
                         <li><a onclick="changeThemeFun('sunny');" >sunny</a></li>

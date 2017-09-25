@@ -72,7 +72,7 @@ function removeNews(){
                     dataType:'json',
                     success:function(data){
                         if(data.success){
-                            $('#admin_news_grid').datagrid('load');
+                            $('#admin_news_grid').datagrid('reload');
                             $.messager.show({
                                 title:'提示',
                                 msg:data.msg
@@ -96,23 +96,75 @@ function clearNews(){
     $("#admin_news_grid").datagrid('load',{});
     $("#admin_newsManager_searchInput").val('');
 }
+
+function editNews(){
+    row = $('#admin_news_grid').datagrid('getSelected');
+    if(row!=null){
+        $('#admin_news_editDialog').dialog({
+            href:'${pageContext.request.contextPath}/admin/edit/editNews.jsp',
+            title: '新闻修改',    
+            width: 350,    
+            height: 400,
+            modal:true,
+            buttons:[{
+                text:'修改',
+                iconCls:'icon-ok',
+                handler:function(){
+                    $('#admin_news_editForm').form('submit', {    
+                        url:'${pageContext.request.contextPath}/newsAction!edit',
+                        dataType:'json',
+                        success:function(data){ 
+                              var obj = $.parseJSON(data);
+                                if (obj.success) {
+                                    $('#admin_news_editDialog').dialog('close');
+                                    $.messager.show({
+                                        title : '提示',
+                                        msg : obj.msg,
+                                    });
+                                    $('#admin_news_grid').datagrid('reload');
+                            }else{
+                                $('#admin_news_editDialog').dialog('close');
+                                 $.messager.show({
+                                     title : '提示',
+                                     msg : obj.msg,
+                               });
+                            }  
+                        }    
+                    });  
+                }
+            },{
+                text:'取消',
+                iconCls:'icon-remove',
+                handler:function(){
+                    $('#admin_news_editDialog').dialog('close');
+                }
+            }],
+            onLoad:function(){
+                console.info(row.username);
+                $("#admin_news_editForm").form('load',row);
+            
+            }
+        })
+    }else{
+        $.messager.alert('提示信息','请选中一行再点击编辑','info');
+    }
+    
+}
 </script>
 
 
 <div id="admin_newsManager_toolbar">
-    <a href="#" class="easyui-linkbutton"
-        data-options="iconCls:'icon-add',plain:true" onClick="showNewsDia()">添加</a>
-    <a href="#" class="easyui-linkbutton"
-        data-options="iconCls:'icon-remove',plain:true" onClick="removeNews()">删除</a>
-    <a href="#" class="easyui-linkbutton"
-        data-options="iconCls:'icon-edit',plain:true">编辑</a> <input
-        id="admin_newsManager_searchInput" name="username" /> <a href="#"
-        class="easyui-linkbutton"
-        data-options="iconCls:'icon-search',plain:true" onClick="searchNews()">查询</a>
-            <a href="#"class="easyui-linkbutton"data-options="iconCls:'icon-undo',plain:true" onClick="clearNews()">清空</a>
+    <a href="#" class="easyui-linkbutton"data-options="iconCls:'icon-add',plain:true" onClick="showNewsDia()">添加</a>
+    <a href="#" class="easyui-linkbutton"data-options="iconCls:'icon-remove',plain:true" onClick="removeNews()">删除</a>
+    <a href="#" class="easyui-linkbutton"data-options="iconCls:'icon-edit',plain:true" onClick="editNews()">编辑</a> 
+    <input id="admin_newsManager_searchInput" name="username" /> 
+    <a href="#"class="easyui-linkbutton"data-options="iconCls:'icon-search',plain:true" onClick="searchNews()">查询</a>
+    <a href="#"class="easyui-linkbutton"data-options="iconCls:'icon-undo',plain:true" onClick="clearNews()">清空</a>
 </div>
 
 <table id="admin_news_grid"></table>
+
+<div id="admin_news_editDialog"></div>  
 
 <div id="admin_newsManager_addDialog"
     style="width: 300px; height: 250px;" class="easyui-dialog"

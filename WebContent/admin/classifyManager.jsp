@@ -9,7 +9,7 @@ $('#admin_classify_grid').datagrid({
     rownumbers:true,
     checkOnSelect:false,
     selectOnCheck:false,
-    toolbar: '#admin_classifyManager_toolbar',
+    toolbar: '#admin_classify_toolbar',
     sortName:'text',
     sortOrder:'asc',
     columns:[[    
@@ -21,7 +21,7 @@ $('#admin_classify_grid').datagrid({
 });
 
 function searchClassify(){
-    var text = $("#admin_classifyManager_searchInput").val();
+    var text = $("#admin_classify_searchInput").val();
     if(text != ""){
         $('#admin_classify_grid').datagrid('load',{
             text: text
@@ -32,16 +32,16 @@ function searchClassify(){
 }
 
 function showClassDia(){
-    $('#admin_classifyManager_addDialog').dialog('open');
+    $('#admin_classify_addDialog').dialog('open');
 }
 function addClassify(){
-    $('#admin_classifyManager_regForm').form('submit',{
+    $('#admin_classify_regForm').form('submit',{
         
         url:'${pageContext.request.contextPath }/classifyAction!add',
         success:function(data){
             var obj = $.parseJSON(data);
             if (obj.success) {
-                $('#admin_classifyManager_addDialog').dialog('close');
+                $('#admin_classify_addDialog').dialog('close');
                 $.messager.show({
                     title : '提示',
                     msg : obj.msg,
@@ -91,23 +91,81 @@ function removeClassify(){
 
 function clearClassify(){
     $("#admin_classify_grid").datagrid('load',{});
-    $("#admin_classifyManager_searchInput").val('');
+    $("#admin_classify_searchInput").val('');
 }
+
+function editClassify(){
+    row = $('#admin_classify_grid').datagrid('getSelected');
+    console.info(row);
+    if(row!=null){
+        $('#admin_classify_editDialog').dialog({
+            href:'${pageContext.request.contextPath}/admin/edit/editClassify.jsp',
+            title: '分类修改',    
+            width: 300,    
+            height: 250,
+            modal:true,
+            buttons:[{
+                text:'修改',
+                iconCls:'icon-ok',
+                handler:function(){
+                    $('#admin_classify_editForm').form('submit', {    
+                        url:'${pageContext.request.contextPath}/classifyAction!edit',
+                        dataType:'json',
+                        success:function(data){ 
+                              var obj = $.parseJSON(data);
+                                if (obj.success) {
+                                    $('#admin_classify_editDialog').dialog('close');
+                                    $.messager.show({
+                                        title : '提示',
+                                        msg : obj.msg,
+                                    });
+                                    $('#admin_classify_grid').datagrid('reload');
+                            }else{
+                                $('#admin_classify_editDialog').dialog('close');
+                                 $.messager.show({
+                                     title : '提示',
+                                     msg : obj.msg,
+                               });
+                            }  
+                        }    
+                    });  
+                }
+            },{
+                text:'取消',
+                iconCls:'icon-remove',
+                handler:function(){
+                    $('#admin_classify_editDialog').dialog('close');
+                }
+            }],
+            onLoad:function(){
+                console.info(row.username);
+                $("#admin_classify_editForm").form('load',row);
+            
+            }
+        })
+    }else{
+        $.messager.alert('提示信息','请选中一行再点击编辑','info');
+    }
+    
+}
+
+
 </script>
 
 
-<div id="admin_classifyManager_toolbar">
+<div id="admin_classify_toolbar">
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="showClassDia()">添加</a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onClick="removeClassify()">删除</a>
-    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
-    <input id="admin_classifyManager_searchInput" name="text"/>
+    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onClick="editClassify()">编辑</a>
+    <input id="admin_classify_searchInput" name="text"/>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onClick="searchClassify()">查询</a>
         <a href="#"class="easyui-linkbutton"data-options="iconCls:'icon-undo',plain:true" onClick="clearClassify()">清空</a>
 </div>
 
 <table id="admin_classify_grid"></table>
+<div id="admin_classify_editDialog"></div>
  
- <div id="admin_classifyManager_addDialog" style="width:250px; height:150px;" class="easyui-dialog" data-options="title:'添加分类',modal:true,closed:true,buttons:[{
+ <div id="admin_classify_addDialog" style="width:250px; height:150px;" class="easyui-dialog" data-options="title:'添加分类',modal:true,closed:true,buttons:[{
             text:'添加',
             iconCls:'icon-add',
             handler:function(){
@@ -116,10 +174,10 @@ function clearClassify(){
             },{text:'取消',
                 iconCls:'icon-remove',
                 handler:function(){
-                   $('#admin_classifyManager_addDialog').dialog('close'); 
+                   $('#admin_classify_addDialog').dialog('close'); 
                 }
             }]">
-   <form id="admin_classifyManager_regForm" method="post">
+   <form id="admin_classify_regForm" method="post">
         <table>
             <tr>
             <tr>

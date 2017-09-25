@@ -100,10 +100,10 @@ function editUser(){
 	row = $('#admin_user_grid').datagrid('getSelected');
 	if(row!=null){
 		$('#admin_user_editDialog').dialog({
-			href:'${pageContext.request.contextPath}/admin/edit/userEdit.jsp',
+			href:'${pageContext.request.contextPath}/admin/edit/editUser.jsp',
 			title: '用户修改',    
 		    width: 400,    
-		    height: 200,
+		    height: 230,
 		    modal:true,
 		    buttons:[{
                 text:'修改',
@@ -115,12 +115,12 @@ function editUser(){
                 	    success:function(data){ 
                 	    	  var obj = $.parseJSON(data);
                 	            if (obj.success) {
-                	                $('admin_user_grid').datagrid('reload');
                 	                $('#admin_user_editDialog').dialog('close');
                 	                $.messager.show({
                 	                    title : '提示',
                 	                    msg : obj.msg,
                 	                });
+                	               $('#admin_user_grid').datagrid('reload');
                 	        }else{
                 	        	$('admin_user_editDialog').dialog('close');
                 	        	 $.messager.show({
@@ -140,11 +140,8 @@ function editUser(){
             }],
             onLoad:function(){
             	console.info(row.username);
-            	$('#editUsername').val(row.username);
-            	$('#editNick').val(row.nick);
-            	$('#editPassword').val(row.password);
-            	$('#editId').val(row.id);
-            	$('#editCreateTime').val(row.createTime);
+            	$("#admin_user_editForm").form('load',row);
+            
             },
             onClose:function(){
             	$('#admin_user_editDialog').dialog('destroy');

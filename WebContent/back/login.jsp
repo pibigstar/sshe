@@ -12,7 +12,9 @@ $(function() {
                 $.messager.show({
                     title : '提示',
                     msg : obj.msg,
+                    timeout:3000,
                 });
+                window.location.reload();
             }
         }
     });

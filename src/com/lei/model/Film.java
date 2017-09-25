@@ -1,5 +1,6 @@
 package com.lei.model;
 
+import java.io.File;
 import java.util.Date;
 
 public class Film {
@@ -13,12 +14,25 @@ public class Film {
 	private String url;
 	private Date createTime;
 	private Date updateTime;
+	private Date startTime;
 	private String ids;
 	private String sort;
 	private String order;
+	private File file;
 	
 	
-	
+	public Date getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+	public File getFile() {
+		return file;
+	}
+	public void setFile(File file) {
+		this.file = file;
+	}
 	public String getSort() {
 		return sort;
 	}
