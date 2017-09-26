@@ -200,14 +200,13 @@ function editUser(){
 			</tr>
 			<tr>
 				<td>密码</td>
-				<td><input id="pwd" name="password" type="password"
+				<td><input id="admin_user_pwd" name="password" type="password"
 					class="easyui-validatebox"
 					data-options="required:true,missingMessage:'密码不能为空'"></td>
 			</tr>
 			<tr>
 				<td>重复密码</td>
-				<td><input id="rpwd" type="password" class="easyui-validatebox"
-					required="required" validType="equals['#pwd']"></td>
+				<td><input type="password" class="easyui-validatebox" required="required" validType="equals['#admin_user_pwd']"></td>
 			</tr>
 		</table>
 	</form>

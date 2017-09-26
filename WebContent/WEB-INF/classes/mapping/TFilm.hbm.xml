@@ -11,11 +11,8 @@
         <property name="name" type="string">
             <column name="name" length="50" />
         </property>
-        <property name="describe" type="string">
-            <column name="describe" />
-        </property>
-        <property name="classifyId" type="string">
-            <column name="classify_id" length="40" />
+        <property name="filmDescribe" type="string">
+            <column name="film_describe" length="255" />
         </property>
         <property name="classifyText" type="string">
             <column name="classify_text" length="40" />

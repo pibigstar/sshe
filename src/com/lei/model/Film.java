@@ -7,8 +7,8 @@ public class Film {
 
 	private String id;
 	private String name;
-	private String describe;
-	private String classifyId;
+	private File upload;
+	private String filmDescribe;
 	private String classifyText;
 	private String img;
 	private String url;
@@ -18,7 +18,6 @@ public class Film {
 	private String ids;
 	private String sort;
 	private String order;
-	private File file;
 	
 	
 	public Date getStartTime() {
@@ -27,11 +26,12 @@ public class Film {
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
-	public File getFile() {
-		return file;
+
+	public File getUpload() {
+		return upload;
 	}
-	public void setFile(File file) {
-		this.file = file;
+	public void setUpload(File upload) {
+		this.upload = upload;
 	}
 	public String getSort() {
 		return sort;
@@ -63,17 +63,11 @@ public class Film {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDescribe() {
-		return describe;
+	public String getFilmDescribe() {
+		return filmDescribe;
 	}
-	public void setDescribe(String describe) {
-		this.describe = describe;
-	}
-	public String getClassifyId() {
-		return classifyId;
-	}
-	public void setClassifyId(String classifyId) {
-		this.classifyId = classifyId;
+	public void setFilmDescribe(String filmDescribe) {
+		this.filmDescribe = filmDescribe;
 	}
 	public String getClassifyText() {
 		return classifyText;

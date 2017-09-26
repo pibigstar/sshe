@@ -12,42 +12,32 @@
 	<constant name="struts.locale" value="zh_CN" /> 
 	<!-- 设置是否支持动态方法调用(userAction!add)，true为支持，false不支持. --> 
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />   
-    <constant name="struts.devMode" value="true" />  
+    <constant name="struts.devMode" value="false" />  
     <!-- 指定允许上传的文件最大字节数,默认值是2097152(2M),使用struts常量扩大默认上传文件大小 -->  
     <constant name="struts.multipart.maxSize" value="104857600"></constant>  
 	
     <package name="basePackage" extends="struts-default">
-        <global-allowed-methods>reg,login,repair,getMenu,getList,add,remove,edit</global-allowed-methods>
+        <global-allowed-methods>reg,login,repair,getMenu,getList,add,remove,edit,getAll</global-allowed-methods>
     </package>
     
-    <!-- <package name="file" extends="struts-default" namespace="/">  
-           <action name="fileUpload" class="com.lei.action.FilmAction" method="add">  
-               过滤器配置  
+    
+    <package name="film" extends="struts-default" namespace="/">  
+           <action name="fileAction" class="com.lei.action.FileAction" method="add">  
+               <!-- 过滤器配置 -->  
                <interceptor-ref name="fileUpload">  
-                   设置上传的最大字节数  
+                   <!-- 设置上传的最大字节数 -->  
                    <param name="maximumSize">1000000</param>  
-                   设置上传文件的类型  
+                   <!-- 设置上传文件的类型 -->  
                    <param name="allowedTypes">  
                        image/gig,image/png,image/jpeg,image/jpg,image/pjpeg  
                    </param>  
                </interceptor-ref>  
-              
-            设置默认文件上传的保存路径  
+            <!-- 设置默认文件上传的保存路径 -->  
             <interceptor-ref name="defaultStack">  
                 <param name="savePath">./save</param>  
             </interceptor-ref>         
-                   <result name="success">fileUpSuccess.jsp</result>  
-                   <result name="error">fileUpError.jsp</result>  
            </action>  
-             
-           <action name="fileDownload" class="com.lei.action.FilmAction">  
-            <result name="success" type="stream">  
-               <param name="contentType">text/plain</param>    
-               <param name="contentDisposition">attachment;fileName="${fileName}"</param>    
-               <param name="inputName">downloadFile</param>    
-               <param name="bufferSize">1024</param>    
-            </result>  
-        </action>  
-       </package>   -->
+           
+    </package>
     
 </struts>

@@ -10,7 +10,7 @@ $('#admin_news_grid').datagrid({
     rownumbers:true,
     checkOnSelect:false,
     selectOnCheck:false,
-    toolbar: '#admin_newsManager_toolbar',
+    toolbar: '#admin_news_toolbar',
     sortName:'title',
     sortOrder:'asc',
     columns:[[    
@@ -24,7 +24,7 @@ $('#admin_news_grid').datagrid({
 });
 
 function searchNews(){
-	var text = $("#admin_newsManager_searchInput").val();
+	var text = $("#admin_news_searchInput").val();
     if(text != ""){
         $('#admin_news_grid').datagrid('load',{
             title: text
@@ -35,16 +35,16 @@ function searchNews(){
 }
 
 function showNewsDia(){
-    $('#admin_newsManager_addDialog').dialog('open');
+    $('#admin_news_addDialog').dialog('open');
 }
 function addNews(){
-    $('#admin_newsManager_regForm').form('submit',{
+    $('#admin_news_regForm').form('submit',{
         
         url:'${pageContext.request.contextPath }/newsAction!add',
         success:function(data){
             var obj = $.parseJSON(data);
             if (obj.success) {
-                $('#admin_newsManager_addDialog').dialog('close');
+                $('#admin_news_addDialog').dialog('close');
                 $('#admin_news_grid').datagrid('load',{});
                 $.messager.show({
                     title : '提示',
@@ -94,7 +94,7 @@ function removeNews(){
 }
 function clearNews(){
     $("#admin_news_grid").datagrid('load',{});
-    $("#admin_newsManager_searchInput").val('');
+    $("#admin_news_searchInput").val('');
 }
 
 function editNews(){
@@ -144,7 +144,7 @@ function editNews(){
                 $("#admin_news_editForm").form('load',row);
             
             }
-        })
+        });
     }else{
         $.messager.alert('提示信息','请选中一行再点击编辑','info');
     }
@@ -153,11 +153,11 @@ function editNews(){
 </script>
 
 
-<div id="admin_newsManager_toolbar">
+<div id="admin_news_toolbar">
     <a href="#" class="easyui-linkbutton"data-options="iconCls:'icon-add',plain:true" onClick="showNewsDia()">添加</a>
     <a href="#" class="easyui-linkbutton"data-options="iconCls:'icon-remove',plain:true" onClick="removeNews()">删除</a>
     <a href="#" class="easyui-linkbutton"data-options="iconCls:'icon-edit',plain:true" onClick="editNews()">编辑</a> 
-    <input id="admin_newsManager_searchInput" name="username" /> 
+    <input id="admin_news_searchInput" name="username" /> 
     <a href="#"class="easyui-linkbutton"data-options="iconCls:'icon-search',plain:true" onClick="searchNews()">查询</a>
     <a href="#"class="easyui-linkbutton"data-options="iconCls:'icon-undo',plain:true" onClick="clearNews()">清空</a>
 </div>
@@ -166,9 +166,9 @@ function editNews(){
 
 <div id="admin_news_editDialog"></div>  
 
-<div id="admin_newsManager_addDialog"
-    style="width: 300px; height: 250px;" class="easyui-dialog"
-    data-options="title:'添加用户',modal:true,closed:true,buttons:[{
+<div id="admin_news_addDialog"
+    style="width: 350px; height: 300px;" class="easyui-dialog"
+    data-options="title:'添加新闻',modal:true,closed:true,buttons:[{
             text:'添加',
             iconCls:'icon-add',
             handler:function(){
@@ -177,19 +177,18 @@ function editNews(){
             },{text:'取消',
                 iconCls:'icon-remove',
                 handler:function(){
-                   $('#admin_newsManager_addDialog').dialog('close'); 
+                   $('#admin_news_addDialog').dialog('close'); 
                 }
             }]">
-    <form id="admin_newsManager_regForm" method="post">
+    <form id="admin_news_regForm" method="post">
         <table>
             <tr>
                 <td>标题</td>
-                <td><input name="title"class="easyui-validatebox"data-options="required:true,missingMessage:'用户名不能为空'"></td>
+                <td><input name="title"class="easyui-validatebox" data-options="required:true,missingMessage:'不能为空'"></td>
             </tr>
             <tr>
                 <td>简介</td>
-                <td><input name="intro" class="easyui-validatebox"
-                    data-options="required:true,missingMessage:'昵称不能为空'"></td>
+                <td><input name="intro" class="easyui-validatebox" data-options="required:true,missingMessage:'不能为空'"></td>
             </tr>
             <tr>
                 <td>内容</td>

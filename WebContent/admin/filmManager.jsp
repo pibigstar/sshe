@@ -17,7 +17,7 @@ $('#admin_film_grid').datagrid({
         {field:'id',title:'影片ID',width:60,checkbox:true},
         {field:'img',title:'片图',width:60}, 
         {field:'name',title:'影片名称',width:60,sortable:true},    
-        {field:'describe',title:'描述',width:60},
+        {field:'filmDescribe',title:'描述',width:60},
         {field:'classifyText',title:'分类',width:60},
         {field:'startTime',title:'上映时间',width:60},
         {field:'createTime',title:'创建时间',width:60},    
@@ -25,6 +25,16 @@ $('#admin_film_grid').datagrid({
         {field:'url',title:'下载链接',width:60}
     ]]    
 });
+
+
+$('#admin_film_combobox').combobox({    
+    url:'${pageContext.request.contextPath}/classifyAction!getAll',    
+    valueField:'text',    
+    textField:'text',
+    
+}); 
+
+
 
 function searchFilm(){
 	var text = $("#admin_film_searchInput").val();
@@ -40,14 +50,17 @@ function searchFilm(){
 function showFilmDia(){
     $('#admin_film_addDialog').dialog('open');
 }
+
+
 function addFilm(){
     $('#admin_film_regForm').form('submit',{
         
-        url:'${pageContext.request.contextPath }/filmAction!add',
+        url:'${pageContext.request.contextPath }/fileAction',
         success:function(data){
             var obj = $.parseJSON(data);
             if (obj.success) {
                 $('#admin_film_addDialog').dialog('close');
+                $('#admin_film_grid').datagrid('load',{});
                 $.messager.show({
                     title : '提示',
                     msg : obj.msg,
@@ -134,16 +147,20 @@ function clearFilm(){
                 </td>
             </tr>
             <tr>
+                <td>分类</td>
+                <td><input id="admin_film_combobox" name="classifyText" value="请选择分类" style="width:200px" /> </td>
+            </tr>
+            <tr>
                 <td>上映时间</td>
                 <td><input name="startTime" class="easyui-datebox" required="required" style="width:200px"/></td>
             </tr>
              <tr>
                 <td>片图</td>
-                <td><input name="file" class="easyui-filebox" data-options="accept:'image/*',multiple:true" style="width:300px"></td>
+                <td><input name="upload"  class="easyui-filebox" data-options="accept:'image/*',multiple:true" style="width:300px"></td>
             </tr>
             <tr>
                 <td>描述</td>
-                <td><input name="describe" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:100px"></td>
+                <td><input name="filmDescribe" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:100px"></td>
             </tr>
         </table>
     </form>

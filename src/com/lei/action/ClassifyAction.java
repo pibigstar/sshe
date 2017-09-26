@@ -1,6 +1,7 @@
 package com.lei.action;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.BeanUtils;
@@ -33,11 +34,20 @@ public class ClassifyAction extends BaseAction implements ModelDriven<TClassify>
 	}
 	
 	/**
-	 * 得到全部分类
+	 * 表格得到全部分类（分页）
 	 */
 	public void getList() {
 		GridModel g = classifyService.getList(classify);
 		super.writeJSON(g);
+	}
+	
+	/**
+	 * 列表框得到全部分类
+	 */
+	public void getAll() {
+		String hql = "from TClassify t";
+		List<TClassify> tClassifies = classifyService.find(hql);
+		super.writeJSON(tClassifies);
 	}
 	
 	/**

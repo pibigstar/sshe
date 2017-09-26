@@ -10,8 +10,7 @@ public class TFilm implements java.io.Serializable {
 
 	private String id;
 	private String name;
-	private String describe;
-	private String classifyId;
+	private String filmDescribe;
 	private String classifyText;
 	private String img;
 	private String url;
@@ -30,8 +29,7 @@ public class TFilm implements java.io.Serializable {
 			String url, Date startTime, Date createTime, Date updateTime) {
 		this.id = id;
 		this.name = name;
-		this.describe = describe;
-		this.classifyId = classifyId;
+		this.filmDescribe = filmDescribe;
 		this.classifyText = classifyText;
 		this.img = img;
 		this.url = url;
@@ -56,20 +54,13 @@ public class TFilm implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public String getDescribe() {
-		return this.describe;
+
+	public String getFilmDescribe() {
+		return filmDescribe;
 	}
 
-	public void setDescribe(String describe) {
-		this.describe = describe;
-	}
-
-	public String getClassifyId() {
-		return this.classifyId;
-	}
-
-	public void setClassifyId(String classifyId) {
-		this.classifyId = classifyId;
+	public void setFilmDescribe(String filmDescribe) {
+		this.filmDescribe = filmDescribe;
 	}
 
 	public String getClassifyText() {
