@@ -14,8 +14,8 @@
         <property name="text" type="string">
             <column name="text" length="50" />
         </property>
-        <property name="iconClas" type="string">
-            <column name="iconClas" length="50" />
+        <property name="iconCls" type="string">
+            <column name="iconCls" length="50" />
         </property>
         <property name="url" type="string">
             <column name="url" length="100" />

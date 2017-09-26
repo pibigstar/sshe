@@ -135,18 +135,14 @@ function editUser(){
                 text:'取消',
                 iconCls:'icon-remove',
                 handler:function(){
-                	$('admin_user_editDialog').dialog('close');
+                	$('#admin_user_editDialog').dialog('close');
                 }
             }],
             onLoad:function(){
             	console.info(row.username);
             	$("#admin_user_editForm").form('load',row);
             
-            },
-            onClose:function(){
-            	$('#admin_user_editDialog').dialog('destroy');
             }
-
 		})
 	}else{
         $.messager.alert('提示信息','请选中一行再点击编辑','info');

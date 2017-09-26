@@ -12,7 +12,7 @@ public class TMenu implements java.io.Serializable {
 	private String id;
 	private TMenu TMenu;
 	private String text;
-	private String iconClas;
+	private String iconCls;
 	private String url;
 	private Set<TMenu> TMenus = new HashSet<TMenu>(0);
 
@@ -27,7 +27,7 @@ public class TMenu implements java.io.Serializable {
 		this.id = id;
 		this.TMenu = TMenu;
 		this.text = text;
-		this.iconClas = iconClas;
+		this.iconCls = iconCls;
 		this.url = url;
 		this.TMenus = TMenus;
 	}
@@ -56,12 +56,12 @@ public class TMenu implements java.io.Serializable {
 		this.text = text;
 	}
 
-	public String getIconClas() {
-		return this.iconClas;
+	public String getIconCls() {
+		return iconCls;
 	}
 
-	public void setIconClas(String iconClas) {
-		this.iconClas = iconClas;
+	public void setIconCls(String iconCls) {
+		this.iconCls = iconCls;
 	}
 
 	public String getUrl() {

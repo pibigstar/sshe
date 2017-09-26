@@ -15,7 +15,12 @@ $('#admin_film_grid').datagrid({
     sortOrder:'asc',
     columns:[[    
         {field:'id',title:'影片ID',width:60,checkbox:true},
-        {field:'img',title:'片图',width:60}, 
+        {field:'img',title:'片图',width:60,formatter:function(value,row){
+            var str = "";
+            if(value!="" || value!=null){
+            str = "<img style=\"height: 80px;width: 150px;\" src=\""+value+"\"/>";
+                  return str;
+            }}},
         {field:'name',title:'影片名称',width:60,sortable:true},    
         {field:'filmDescribe',title:'描述',width:60},
         {field:'classifyText',title:'分类',width:60},
@@ -85,12 +90,12 @@ function removeFilm(){
                     type:'POST',
                     data:{ids:ids.join(',')},
                     dataType:'json',
-                    success:function(data){
-                        if(data.success){
-                            $('#admin_film_grid').datagrid('load');
+                    success:function(d){
+                        if(d.success){
+                            $('#admin_film_grid').datagrid('reload');
                             $.messager.show({
                                 title:'提示',
-                                msg:data.msg
+                                msg:d.msg
                             })
                         }else{
                             $.messager.show({
@@ -112,19 +117,73 @@ function clearFilm(){
     $("#admin_film_grid").datagrid('load',{});
     $("#admin_film_searchInput").val('');
 }
+
+function editFilm(){
+    row = $('#admin_film_grid').datagrid('getSelected');
+    if(row!=null){
+        $('#admin_film_editDialog').dialog({
+            href:'${pageContext.request.contextPath}/admin/edit/editFilm.jsp',
+            title: '电影修改',    
+            width: 400,    
+            height: 300,
+            modal:true,
+            buttons:[{
+                text:'修改',
+                iconCls:'icon-ok',
+                handler:function(){
+                    $('#admin_film_editForm').form('submit', {    
+                        url:'${pageContext.request.contextPath}/filmAction!edit',
+                        dataType:'json',
+                        success:function(data){ 
+                              var obj = $.parseJSON(data);
+                                if (obj.success) {
+                                    $('#admin_film_editDialog').dialog('close');
+                                    $.messager.show({
+                                        title : '提示',
+                                        msg : obj.msg,
+                                    });
+                                    $('#admin_film_grid').datagrid('reload');
+                            }else{
+                                $('#admin_film_editDialog').dialog('close');
+                                 $.messager.show({
+                                     title : '提示',
+                                     msg : obj.msg,
+                               });
+                            }  
+                        }    
+                    });  
+                }
+            },{
+                text:'取消',
+                iconCls:'icon-remove',
+                handler:function(){
+                    $('#admin_film_editDialog').dialog('close');
+                }
+            }],
+            onLoad:function(){
+                $("#admin_film_editForm").form('load',row);
+            }
+        });
+    }else{
+        $.messager.alert('提示信息','请选中一行再点击编辑','info');
+    }
+    
+}
 </script>
 
 
 <div id="admin_film_toolbar">
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onClick="showFilmDia()">添加</a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onClick="removeFilm()">删除</a>
-    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
+    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onClick="editFilm()">编辑</a>
     <input id="admin_film_searchInput" name="name"/>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onClick="searchFilm()">查询</a>
     <a href="#"class="easyui-linkbutton"data-options="iconCls:'icon-undo',plain:true" onClick="clearFilm()">清空</a>
 </div>
 
 <table id="admin_film_grid"></table>
+
+<div id="admin_film_editDialog"></div>
  
  <div id="admin_film_addDialog" style="width:400px; height:300px;" class="easyui-dialog" data-options="title:'新增影片',modal:true,closed:true,buttons:[{
             text:'添加',

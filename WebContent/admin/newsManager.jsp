@@ -100,6 +100,7 @@ function clearNews(){
 function editNews(){
     row = $('#admin_news_grid').datagrid('getSelected');
     if(row!=null){
+    	$('#admin_news_grid').datagrid('clearSelections');
         $('#admin_news_editDialog').dialog({
             href:'${pageContext.request.contextPath}/admin/edit/editNews.jsp',
             title: '新闻修改',    

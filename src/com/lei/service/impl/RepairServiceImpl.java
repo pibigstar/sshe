@@ -120,6 +120,7 @@ public class RepairServiceImpl implements RepairServiceI {
 		TMenu sy = new TMenu();
 		sy.setId("0");
 		sy.setText("首页");
+		sy.setIconCls("icon-tip");
 		menuDao.saveOrUpdate(sy);
 		
 		TMenu xtgl = new TMenu();
@@ -166,6 +167,7 @@ public class RepairServiceImpl implements RepairServiceI {
 		cdgl.setId("cdgl");
 		cdgl.setText("菜单管理");
 		cdgl.setTMenu(xtgl);
+		cdgl.setUrl("admin/menuManager.jsp");
 		menuDao.saveOrUpdate(cdgl);
 	}
 	

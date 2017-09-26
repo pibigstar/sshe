@@ -6,6 +6,7 @@ import java.util.Date;
 public class Film {
 
 	private String id;
+	private String ids;
 	private String name;
 	private File upload;
 	private String filmDescribe;
@@ -15,7 +16,6 @@ public class Film {
 	private Date createTime;
 	private Date updateTime;
 	private Date startTime;
-	private String ids;
 	private String sort;
 	private String order;
 	

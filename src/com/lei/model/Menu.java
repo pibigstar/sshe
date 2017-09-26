@@ -7,7 +7,7 @@ public class Menu {
 	
 	private String state;
 	private String text;
-	private String iconClas;
+	private String iconCls;
 	private String url;
 	public String getId() {
 		return id;
@@ -35,11 +35,12 @@ public class Menu {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public String getIconClas() {
-		return iconClas;
+	
+	public String getIconCls() {
+		return iconCls;
 	}
-	public void setIconClas(String iconClas) {
-		this.iconClas = iconClas;
+	public void setIconCls(String iconCls) {
+		this.iconCls = iconCls;
 	}
 	public String getUrl() {
 		return url;
