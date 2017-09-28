@@ -25,6 +25,16 @@
                 expires : 7
             });
         };
+        
+        //注销登录
+        function userQuit(){
+        	$.ajax({
+        		url:'${pageContext.request.contextPath}/userAction!quit',
+        		success:function(){
+        			window.location.reload();
+        		}
+        	})
+        }
 </script>
 <div id="index_tree" data-options="region:'west',title:'功能导航'"style="width: 200px;">
 
@@ -50,7 +60,15 @@
                         <li><a onclick="changeThemeFun('dark-hive');">dark-hive</a></li>
                         <li><a onclick="changeThemeFun('sunny');" >sunny</a></li>
                         <li><a onclick="changeThemeFun('pepper-grinder');">pepper-grinder</a></li>
-                    </ul>       
+                    </ul> 
+               </li> 
+               <li>
+                    <span>用户注销</span>
+                    <ul>
+                        <li><a onClick="userQuit()">注销</a></li>
+                    </ul>
+               
+               </li>     
             </ul> 
         </div> 
     </div>  

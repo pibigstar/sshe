@@ -4,7 +4,7 @@
         <table>
             <tr>
                 <td>ID</td>
-                <td><input name="id" class="easyui-datebox" readOnly="readOnly" style="width:200px"/></td>
+                <td><input name="id" class="easyui-validatebox" readOnly="readOnly" style="width:200px"/></td>
             </tr>
             
             <tr>

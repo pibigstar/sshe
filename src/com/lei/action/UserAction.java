@@ -137,4 +137,15 @@ public class UserAction extends BaseAction implements ModelDriven<User>,ServletR
 		}
 		super.writeJSON(j);
 	}
+	/**
+	 * 注销登录
+	 */
+	public void quit() {
+		JsonModel j = new JsonModel();
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		session.setAttribute("sessionInfo", null);
+		j.setSuccess(true);
+		j.setMsg("注销成功！");
+		super.writeJSON(j);
+	}
 }

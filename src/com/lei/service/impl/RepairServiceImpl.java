@@ -168,7 +168,7 @@ public class RepairServiceImpl implements RepairServiceI {
 		cdgl.setText("菜单管理");
 		cdgl.setTMenu(xtgl);
 		cdgl.setUrl("admin/menuManager.jsp");
-		menuDao.saveOrUpdate(cdgl);
+		//menuDao.saveOrUpdate(cdgl);
 	}
 	
 	private void repairUser() {

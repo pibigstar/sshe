@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="css/index.css">
 <script type="text/javascript" src="js/my/extends.js"></script>
 <script type="text/javascript" src="js/my/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/my/JQuerySession.js"></script>
 <link rel="shortcut icon" href="favicon.ico" />
 <title>主页</title>
 <script type="text/javascript">

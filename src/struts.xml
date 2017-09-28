@@ -17,7 +17,7 @@
     <constant name="struts.multipart.maxSize" value="104857600"></constant>  
 	
     <package name="basePackage" extends="struts-default">
-        <global-allowed-methods>reg,login,repair,getMenu,getList,add,remove,edit,getAll</global-allowed-methods>
+        <global-allowed-methods>reg,login,repair,getMenu,getList,add,remove,edit,getAll,quit</global-allowed-methods>
     </package>
     
     
